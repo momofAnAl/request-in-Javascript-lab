@@ -4,6 +4,8 @@
 
 // const { response } = require("express");
 
+// const { response } = require("express");
+
 // const { default: axios } = require("axios");
 
 // const { response, text } = require("express");
@@ -122,14 +124,14 @@ document.querySelector('#animals-button').addEventListener('click', ohMy);
 const repeatMyParam = () => {
   axios.get('http://localhost:3000/repeat/"SOMEPARAM"')
   .then(response => {
-    console.log(response.data)
+    console.log(response.data);
+    //grab element with id of "repeat-text"
+    repeatText = document.querySelector('#repeat-text');
+    //set its textContent property equal to response data
+    repeatText.textContent = response.data;
+    //use style method to change display to 'block'
+    repeatText.style.display = 'block';
   })
-  //grab element with id of "repeat-text"
-  repeatText = document.querySelector('#repeat-text');
-  //set its textContent property equal to response data
-  repeatText.textContent = response.data;
-  //use style method to change display to 'block'
-  repeatText.style.display = 'block';
 }
 document.querySelector('#repeat-button').addEventListener('click',repeatMyParam);
 
@@ -156,11 +158,15 @@ document.querySelector('#repeat-button').addEventListener('click',repeatMyParam)
 */
 
 const myFunc = () => {
-  axios.get('http://localhost:3000/query-test', {
-    params: {
-      name: 'Anh Tran'
-    }
-  })  
+  axios.get('http://localhost:3000/query-test/?name=Anh Tran')
+  .then(response => {
+    console.log(response.data);
+    repeatText = document.querySelector('#repeat-text');
+    //set its textContent property equal to response data
+    repeatText.textContent = response.data;
+    //use style method to change display to 'block'
+    repeatText.style.display = 'block';
+  }) 
 }
 document.querySelector('#query-button').addEventListener('click', myFunc);
 
@@ -183,9 +189,9 @@ document.querySelector('#query-button').addEventListener('click', myFunc);
 /*
   In the function that you wrote for Problem 8, change the URL to test a couple different scenarios.
 
-  1: Send no queries on the URL -- what happened?
+  1: Send no queries on the URL -- they sent out the message "You sent an empty query!"
 
-  2: Send more than 1 query on the URL -- what happened?
+  2: Send more than 1 query on the URL -- they sent message "You sent query: name with value:  !"
 */
 
 // Edit code in Problem 8
